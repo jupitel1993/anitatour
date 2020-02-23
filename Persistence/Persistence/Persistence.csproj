@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+    <LangVersion>8</LangVersion>
+    <!--<Nullable>enable</Nullable>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200204160407_CEACLM-8 add shops table.cs" />
+    <Compile Remove="Migrations\20200204160407_CEACLM-8 add shops table.Designer.cs" />
+    <Compile Remove="Migrations\20200206130014_ceaclm-10 set Id key.cs" />
+    <Compile Remove="Migrations\20200206130014_ceaclm-10 set Id key.Designer.cs" />
+    <Compile Remove="Migrations\20200206140324_CEACLM-10 remove rquired license kye.cs" />
+    <Compile Remove="Migrations\20200206140324_CEACLM-10 remove rquired license kye.Designer.cs" />
+    <Compile Remove="Migrations\20200206145536_CEACLM-10 added unique values.cs" />
+    <Compile Remove="Migrations\20200206145536_CEACLM-10 added unique values.Designer.cs" />
+    <Compile Remove="Migrations\20200210115705_CEACLM-32 add download members.cs" />
+    <Compile Remove="Migrations\20200210115705_CEACLM-32 add download members.Designer.cs" />
+    <Compile Remove="Migrations\20200211085837_CEACLM-32 download members names.cs" />
+    <Compile Remove="Migrations\20200211085837_CEACLM-32 download members names.Designer.cs" />
+    <Compile Remove="Migrations\20200211090120_CEACLM-32 members name.cs" />
+    <Compile Remove="Migrations\20200211090120_CEACLM-32 members name.Designer.cs" />
+    <Compile Remove="Migrations\20200211090539_CEACLM-32 members names.cs" />
+    <Compile Remove="Migrations\20200211090539_CEACLM-32 members names.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Application\Application.csproj" />
+    <ProjectReference Include="..\..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+</Project>
