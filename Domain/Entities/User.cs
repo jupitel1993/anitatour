@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Enums;
 
 namespace Domain.Entities
 {
@@ -6,7 +7,7 @@ namespace Domain.Entities
     {
         public bool Active { get; set; }
 
-        public bool Super { get; set; }
+        public ERole Role { get; set; }
 
         public string Login { get; set; }
 
