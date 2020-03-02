@@ -11,5 +11,9 @@
         /// The user name
         /// </summary>
         public const string UserName = "username";
+        /// <summary>
+        /// The user name
+        /// </summary>
+        public const string Role = "role";
     }
 }

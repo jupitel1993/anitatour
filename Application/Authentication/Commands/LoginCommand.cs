@@ -5,19 +5,20 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Authentication.Commands
 {
-    public class LoginCommand : IRequest<int>
+    public class LoginCommand : IRequest<(int, ERole)>
     {
         public string Login { get; set; }
 
         public string Password { get; set; }
     }
 
-    public class LoginCommandHandler : IRequestHandler<LoginCommand, int>
+    public class LoginCommandHandler : IRequestHandler<LoginCommand, (int, ERole)>
     {
         private readonly IDbContext _context;
         private readonly IHasherService _hasherService;
@@ -27,7 +28,7 @@ namespace Application.Authentication.Commands
             _context = context;
             _hasherService = hasherService;
         }
-        public async Task<int> Handle(LoginCommand command, CancellationToken cancellationToken)
+        public async Task<(int, ERole)> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
             User user;
             try
@@ -50,7 +51,7 @@ namespace Application.Authentication.Commands
                 throw new InvalidCredentialException();
             }
 
-            return user.Id;
+            return (user.Id, user.Role);
         }
     }
 }

@@ -10,6 +10,7 @@ using API.Common.Extensions;
 using API.Settings;
 using Application.Common.Interfaces;
 using Domain.Constants;
+using Domain.Enums;
 using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Primitives;
 using Microsoft.IdentityModel.Tokens;
@@ -37,7 +38,7 @@ namespace API.Services
 
         public int GetUserId() => User.GetId();
         
-        public (string, DateTime) GetSecurityToken(int id, string username)
+        public (string, DateTime) GetSecurityToken(int id, ERole role, string username)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appConfiguration.Audience.Secret);
@@ -46,6 +47,7 @@ namespace API.Services
                 Subject = new ClaimsIdentity(new []
                 {
                     new Claim(CustomClaimTypes.Id, id.ToString()),
+                    new Claim(CustomClaimTypes.Role, $"{role}"),
                     new Claim(CustomClaimTypes.UserName, username),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_appConfiguration.Audience.TokenExpiryMinutes),

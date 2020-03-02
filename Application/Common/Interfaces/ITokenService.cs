@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Threading.Tasks;
+using Domain.Enums;
 
 namespace Application.Common.Interfaces
 {
@@ -10,7 +11,7 @@ namespace Application.Common.Interfaces
 
         int GetUserId();
 
-        (string, DateTime) GetSecurityToken(int id, string username);
+        (string, DateTime) GetSecurityToken(int id, ERole role, string username);
 
         Task<bool> IsCurrentTokenActive();
 
