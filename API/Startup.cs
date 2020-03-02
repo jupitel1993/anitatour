@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using API.Common;
+using API.Common.Constants;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,8 @@ using Microsoft.Extensions.Hosting;
 using API.Common.Exceptions;
 using API.Settings;
 using API.Swagger;
+using Domain.Constants;
+using Domain.Enums;
 using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -190,6 +193,13 @@ namespace API
                         OnChallenge = opt => throw new UnauthorizedAccessException(),
                     };
                 });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Manager",
+                    policy => policy.RequireClaim(CustomClaimTypes.Role, $"{ERole.Manager}", $"{ERole.Admin}"));
+                options.AddPolicy("Admin",
+                    policy => policy.RequireClaim(CustomClaimTypes.Role,  $"{ERole.Admin}"));
+            });
         }
     }
 }

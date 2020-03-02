@@ -29,8 +29,7 @@ namespace Persistence.Configurations
                 .IsRequired();
 
             builder
-                .Property(x => x.Super)
-                .HasDefaultValue(false)
+                .Property(x => x.Role)
                 .IsRequired();
 
         }
