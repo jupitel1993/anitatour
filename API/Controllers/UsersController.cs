@@ -54,9 +54,16 @@ namespace API.Controllers
         [Authorize(Policy = Policy.AdminOnly)]
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> Delete([FromRoute] int id)
+        public async Task<ActionResult> Delete([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new DeleteUserCommand(){UserId = id}));
+        }
+
+        [HttpPost("{id}/activate")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult> SetActiveState([FromRoute] int id, [FromBody] bool state)
+        {
+            return Ok(await Mediator.Send(new SetActiveUserCommand() { UserId = id, State = state}));
         }
 
     }
