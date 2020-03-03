@@ -195,10 +195,10 @@ namespace API
                 });
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("Manager",
-                    policy => policy.RequireClaim(CustomClaimTypes.Role, $"{ERole.Manager}", $"{ERole.Admin}"));
-                options.AddPolicy("Admin",
-                    policy => policy.RequireClaim(CustomClaimTypes.Role,  $"{ERole.Admin}"));
+                options.AddPolicy(Policy.Manager,
+                    policy => policy.RequireRole($"{(int) ERole.Manager}", $"{(int)ERole.Admin}"));
+                options.AddPolicy(Policy.AdminOnly,
+                    policy => policy.RequireRole($"{(int)ERole.Admin}"));
             });
         }
     }

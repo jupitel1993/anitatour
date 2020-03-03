@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Common.System.Commands
@@ -37,9 +38,9 @@ namespace Application.Common.System.Commands
             {
                 Login = "admin",
                 Password = _hasher.GetHash("admin"),
-                Super = true,
+                Role = ERole.Admin,
                 Active = true,
-                Username = "Super Admin",
+                Username = "admin",
             });
             return _context.SaveChangesAsync(cancellationToken);
         }

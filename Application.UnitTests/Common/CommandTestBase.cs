@@ -19,7 +19,6 @@ namespace Application.UnitTests.Common
         protected readonly AppDbContext Context;
         protected readonly IMapper Mapper;
         protected IHasherService HasherServiceMock;
-        protected ICipherService CipherServiceMock;
 
         public CommandTestBase()
         {
@@ -31,7 +30,6 @@ namespace Application.UnitTests.Common
                 new AppFilterMethods());
 
             InitializeHasherService();
-            InitializeCipherService();
         }
 
         private void InitializeHasherService()
@@ -42,24 +40,7 @@ namespace Application.UnitTests.Common
                 .Returns("encryptedPassword");
             HasherServiceMock = mockHasherService.Object;
         }
-
-        private void InitializeCipherService()
-        {
-            var mockCipherService = new Mock<ICipherService>();
-            mockCipherService
-                .Setup(x => x.Encrypt(It.IsAny<string>()))
-                .Returns("encrypted");
-            mockCipherService
-                .Setup(x => x.Encrypt(It.IsAny<int>(), It.IsAny<DateTime>(), It.IsAny<EModule>()))
-                .Returns("encrypted");
-            mockCipherService
-                .Setup(x => x.Decrypt(It.IsAny<string>()))
-                .Returns("decrypted");
-            CipherServiceMock = mockCipherService.Object;
-        }
-
-
-
+        
         public void Dispose()
         {
             TestContextFactory.Destroy(Context);

@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ShopValueIsNotUnique" xml:space="preserve">
-    <value>A shop with value "{0}" already exists. Please enter another.</value>
+  <data name="SomeValueIsNotUnique" xml:space="preserve">
+    <value>Entity with value "{0}" already exists. Please enter another.</value>
   </data>
   <data name="UserIsNotAuthorized" xml:space="preserve">
     <value>Not authorized</value>

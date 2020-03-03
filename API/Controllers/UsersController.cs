@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using API.Common.Constants;
 using Application.Common;
 using Application.Users;
 using Application.Users.Commands;
@@ -10,12 +11,12 @@ using Sieve.Models;
 
 namespace API.Controllers
 {
+    [Authorize(Policy = Policy.Manager)]
     public class UsersController : BaseController
     {
-        [Authorize(Policy = "Manager")]
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> Get([FromQuery] int id)
+        public async Task<ActionResult<UserDto>> Get([FromRoute] int id)
         {
             var user = await Mediator.Send(new GetUserByIdQuery(){Id = id});
 
@@ -39,10 +40,9 @@ namespace API.Controllers
             return Ok(await Mediator.Send(new CreateUserCommand() {UserDto = user}));
         }
 
-        [AllowAnonymous]
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> Update([FromQuery] int id, [FromBody] UserDto userDto)
+        public async Task<ActionResult<UserDto>> Update([FromRoute] int id, [FromBody] UserDto userDto)
         {
             userDto.Id = id;
             var user = await Mediator.Send(new UpdateUserCommand() { UserDto = userDto });
@@ -51,10 +51,10 @@ namespace API.Controllers
         }
 
 
-        [Authorize(Policy = "Manager")]
+        [Authorize(Policy = Policy.AdminOnly)]
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> Delete([FromQuery] int id)
+        public async Task<ActionResult<UserDto>> Delete([FromRoute] int id)
         {
             return Ok(await Mediator.Send(new DeleteUserCommand(){UserId = id}));
         }

@@ -73,7 +73,7 @@ namespace API.Common.Exceptions
             var fullMessage = exception.InnerException.Message;
             var value = Regex.Match(fullMessage, "(?<=\\().+?(?=\\))");
             
-            return string.Format(ErrorMessages.ShopValueIsNotUnique, value);
+            return string.Format(ErrorMessages.SomeValueIsNotUnique, value);
         }
     }
 }

@@ -47,7 +47,8 @@ namespace API.Services
                 Subject = new ClaimsIdentity(new []
                 {
                     new Claim(CustomClaimTypes.Id, id.ToString()),
-                    new Claim(CustomClaimTypes.Role, $"{role}"),
+                    new Claim(CustomClaimTypes.Role, $"{(int) role}"),
+                    //new Claim(ClaimTypes.Role, role.ToString()),
                     new Claim(CustomClaimTypes.UserName, username),
                 }),
                 Expires = DateTime.UtcNow.AddMinutes(_appConfiguration.Audience.TokenExpiryMinutes),
