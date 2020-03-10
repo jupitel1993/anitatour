@@ -19,13 +19,16 @@ namespace Application.Users
 
         public string Username { get; set; }
 
+        public int? CompanyId { get; set; }
 
         public void Mapping(Profile profile)
         {
             profile.CreateMap<User, UserDto>()
+                .ForMember(x => x.CompanyId, c => c.MapFrom(x => x.Company.Id))
                 .ForMember(x => x.Password, _ => _.Ignore());
 
-            profile.CreateMap<UserDto, User>();
+            profile.CreateMap<UserDto, User>()
+                .ForMember(x => x.Company, _ => _.Ignore());
         }
     }
 }

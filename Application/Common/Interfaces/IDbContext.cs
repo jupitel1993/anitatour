@@ -10,6 +10,7 @@ namespace Application.Common.Interfaces
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 
         DbSet<User> Users { get; set; }
+        DbSet<Company> Companies { get; set; }
 
     }
 }

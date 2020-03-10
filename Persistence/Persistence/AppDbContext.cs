@@ -42,7 +42,8 @@ namespace Persistence
         }
 
         public DbSet<User> Users { get; set; }
-        
+        public DbSet<Company> Companies { get; set; }
+
         private void SetModifyUserAndDate()
         {
             ChangeTracker.DetectChanges();

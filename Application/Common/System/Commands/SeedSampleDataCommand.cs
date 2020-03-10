@@ -42,6 +42,22 @@ namespace Application.Common.System.Commands
                 Active = true,
                 Username = "admin",
             });
+            _context.Users.Add(new User()
+            {
+                Login = "manager",
+                Password = _hasher.GetHash("manager"),
+                Role = ERole.Manager,
+                Active = true,
+                Username = "manager",
+            });
+            _context.Users.Add(new User()
+            {
+                Login = "agent",
+                Password = _hasher.GetHash("agent"),
+                Role = ERole.Agent,
+                Active = false,
+                Username = "agent",
+            });
             return _context.SaveChangesAsync(cancellationToken);
         }
     }

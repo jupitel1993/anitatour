@@ -15,5 +15,7 @@ namespace Domain.Entities
 
         public string Username { get; set; }
 
+        public Company Company { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using AutoMapper;
 using Domain.Entities;
+using Domain.Enums;
 using MediatR;
 
 namespace Application.Users.Commands
@@ -35,6 +36,10 @@ namespace Application.Users.Commands
                 Role = dto.Role,
                 Password = _hasher.GetHash(dto.Password),
             };
+            if (dto.Role == ERole.Agent)
+            {
+                user.Company = new Company();
+            }
             _context.Users.Add(user);
             await _context.SaveChangesAsync(cancellationToken);
             
