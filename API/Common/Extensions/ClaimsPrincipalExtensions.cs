@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using Domain.Constants;
+using Domain.Enums;
 
 namespace API.Common.Extensions
 {
@@ -8,6 +9,10 @@ namespace API.Common.Extensions
         public static int GetId(this ClaimsPrincipal user)
         {
             return int.Parse(user.FindFirstValue(CustomClaimTypes.Id));
+        }
+        public static ERole GetRole(this ClaimsPrincipal user)
+        {
+            return (ERole) int.Parse(user.FindFirstValue(ClaimTypes.Role));
         }
         public static string GetUserName(this ClaimsPrincipal user)
         {

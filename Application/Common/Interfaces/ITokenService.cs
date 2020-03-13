@@ -8,7 +8,7 @@ namespace Application.Common.Interfaces
     public interface ITokenService
     {
         string GetUserName();
-
+        ERole GetUserRole();
         int GetUserId();
 
         (string, DateTime) GetSecurityToken(int id, ERole role, string username);

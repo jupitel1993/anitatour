@@ -36,7 +36,6 @@ namespace API.Services
 
         private ClaimsPrincipal User => _httpContextAccessor?.HttpContext?.User;
 
-        public int GetUserId() => User.GetId();
         
         public (string, DateTime) GetSecurityToken(int id, ERole role, string username)
         {
@@ -63,6 +62,8 @@ namespace API.Services
 
 
         public string GetUserName() => User.GetUserName();
+        public int GetUserId() => User.GetId();
+        public ERole GetUserRole() => User.GetRole();
 
         public async Task<bool> IsCurrentTokenActive() => await IsTokenActiveAsync(GetCurrentTokenAsync());
 
