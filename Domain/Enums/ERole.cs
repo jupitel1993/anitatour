@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
 
 namespace Domain.Enums
 {
     public enum ERole
     {
-        Admin = 1,
-        Manager = 2,
-        Agent = 3,
+        Agent = 2,
+        Manager = 4,
+        ManagerLead = 6,
+        Admin = 8,
     }
 }

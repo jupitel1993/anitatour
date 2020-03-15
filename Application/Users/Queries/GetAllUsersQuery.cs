@@ -36,7 +36,7 @@ namespace Application.Users.Queries
         public async Task<Pageable<UserDto>> Handle(GetAllUsersQuery query, CancellationToken cancellationToken)
         {
             var role = _tokenService.GetUserRole();
-            var results = _context.Users.AsNoTracking().Where(x => x.Role > role);
+            var results = _context.Users.AsNoTracking().Where(x => x.Role < role);
             results = _sieveProcessor.Apply(query.SieveModel, results, out var totalCount);
             var items = await _mapper.ProjectTo<UserDto>(results).ToListAsync(cancellationToken);
             //var items = _mapper.Map<List<UserDto>>(await results.ToListAsync(cancellationToken));

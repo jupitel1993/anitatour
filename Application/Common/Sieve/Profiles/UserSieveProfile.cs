@@ -8,8 +8,21 @@ namespace Application.Common.Sieve.Profiles
         public SievePropertyMapper MapProperties(SievePropertyMapper mapper)
         {
             mapper.Property<User>(x => x.Id)
-                .CanSort();
-            
+                .CanSort()
+                .CanFilter();
+            mapper.Property<User>(x => x.Active)
+                .CanSort()
+                .CanFilter();
+            mapper.Property<User>(x => x.Login)
+                .CanSort()
+                .CanFilter();
+            mapper.Property<User>(x => x.Role)
+                .CanSort()
+                .CanFilter();
+            mapper.Property<User>(x => x.Username)
+                .CanSort()
+                .CanFilter();
+
             return mapper;
         }
     }

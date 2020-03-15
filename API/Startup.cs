@@ -196,7 +196,9 @@ namespace API
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(Policy.Manager,
-                    policy => policy.RequireRole($"{(int) ERole.Manager}", $"{(int)ERole.Admin}"));
+                    policy => policy.RequireRole($"{(int) ERole.Manager}", $"{(int)ERole.ManagerLead}", $"{(int)ERole.Admin}"));
+                options.AddPolicy(Policy.ManagerLead,
+                    policy => policy.RequireRole($"{(int)ERole.ManagerLead}", $"{(int)ERole.Admin}"));
                 options.AddPolicy(Policy.AdminOnly,
                     policy => policy.RequireRole($"{(int)ERole.Admin}"));
             });

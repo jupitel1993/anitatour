@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <Folder Include="Common\Exceptions\" />
+    <Folder Include="Countries\Commands\" />
+    <Folder Include="Countries\Queries\" />
   </ItemGroup>
 
 </Project>

@@ -25,7 +25,6 @@ namespace Application.Common.System.Commands
 
         public async Task<Unit> Handle(SeedSampleDataCommand request, CancellationToken cancellationToken)
         {
-            // todo: remove (temp solution for avoiding warnings)
             await SeedSuperadmin(cancellationToken);
             
             return await Task.FromResult(Unit.Value);
@@ -44,6 +43,14 @@ namespace Application.Common.System.Commands
             });
             _context.Users.Add(new User()
             {
+                Login = "managerlead",
+                Password = _hasher.GetHash("managerlead"),
+                Role = ERole.ManagerLead,
+                Active = true,
+                Username = "managerlead",
+            });
+            _context.Users.Add(new User()
+            {
                 Login = "manager",
                 Password = _hasher.GetHash("manager"),
                 Role = ERole.Manager,
@@ -57,7 +64,8 @@ namespace Application.Common.System.Commands
                 Role = ERole.Agent,
                 Active = false,
                 Username = "agent",
-            });
+                Company = new Company(),
+        });
             return _context.SaveChangesAsync(cancellationToken);
         }
     }
