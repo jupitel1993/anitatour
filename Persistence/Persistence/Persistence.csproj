@@ -28,6 +28,8 @@
     <Compile Remove="Migrations\20200211090539_CEACLM-32 members names.Designer.cs" />
     <Compile Remove="Migrations\20200310202306_add company to user.cs" />
     <Compile Remove="Migrations\20200310202306_add company to user.Designer.cs" />
+    <Compile Remove="Migrations\20200318171032_add index.cs" />
+    <Compile Remove="Migrations\20200318171032_add index.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

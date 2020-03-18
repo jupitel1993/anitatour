@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200318171032_add index")]
-    partial class addindex
+    [Migration("20200318190455_add countries")]
+    partial class addcountries
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,7 +111,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Domain.Entities.Direction", b =>
@@ -151,7 +151,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Direction");
+                    b.ToTable("Directions");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

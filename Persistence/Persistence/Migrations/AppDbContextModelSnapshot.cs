@@ -109,7 +109,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Country");
+                    b.ToTable("Countries");
                 });
 
             modelBuilder.Entity("Domain.Entities.Direction", b =>
@@ -149,7 +149,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Direction");
+                    b.ToTable("Directions");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>

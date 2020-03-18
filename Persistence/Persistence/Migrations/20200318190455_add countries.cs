@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class addindex : Migration
+    public partial class addcountries : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Country",
+                name: "Countries",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -21,11 +21,11 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Country", x => x.Id);
+                    table.PrimaryKey("PK_Countries", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Direction",
+                name: "Directions",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -40,38 +40,38 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Direction", x => x.Id);
+                    table.PrimaryKey("PK_Directions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Direction_Country_CountryId",
+                        name: "FK_Directions_Countries_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "Country",
+                        principalTable: "Countries",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Country_Id",
-                table: "Country",
+                name: "IX_Countries_Id",
+                table: "Countries",
                 column: "Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Direction_CountryId",
-                table: "Direction",
+                name: "IX_Directions_CountryId",
+                table: "Directions",
                 column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Direction_Id",
-                table: "Direction",
+                name: "IX_Directions_Id",
+                table: "Directions",
                 column: "Id");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Direction");
+                name: "Directions");
 
             migrationBuilder.DropTable(
-                name: "Country");
+                name: "Countries");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Domain.Common;
 
@@ -22,6 +23,9 @@ namespace Persistence.Configurations
                 modelBuilder
                     .Entity(entityType.ClrType)
                     .HasIndex("Id");
+                modelBuilder
+                    .Entity(entityType.ClrType)
+                    .Property("Id").ValueGeneratedOnAdd();
             }
 
             return modelBuilder;

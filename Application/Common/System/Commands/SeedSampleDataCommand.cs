@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
@@ -25,12 +26,14 @@ namespace Application.Common.System.Commands
 
         public async Task<Unit> Handle(SeedSampleDataCommand request, CancellationToken cancellationToken)
         {
-            await SeedSuperadmin(cancellationToken);
-            
+            await SeedPredefinedUsers(cancellationToken);
+            await SeedCountriesWithDestinations(cancellationToken);
+
+
             return await Task.FromResult(Unit.Value);
         }
 
-        private Task SeedSuperadmin(CancellationToken cancellationToken)
+        private Task SeedPredefinedUsers(CancellationToken cancellationToken)
         {
             if (_context.Users.Any()) return Task.CompletedTask;
             _context.Users.Add(new User()
@@ -66,6 +69,58 @@ namespace Application.Common.System.Commands
                 Username = "agent",
                 Company = new Company(),
         });
+            return _context.SaveChangesAsync(cancellationToken);
+        }
+
+        private Task SeedCountriesWithDestinations(CancellationToken cancellationToken)
+        {
+            if (_context.Countries.Any()) return Task.CompletedTask;
+            _context.Countries.Add(new Country()
+            {
+                Name = "Russia",
+                Directions = new List<Direction>()
+                {
+                    new Direction()
+                    {
+                        Name = "St.Petersburg",
+                        Description = "Some sample description",
+                    },
+                    new Direction()
+                    {
+                        Name = "Karelia",
+                        Description = "Some sample description",
+                    },
+                }
+            });
+            _context.Countries.Add(new Country()
+            {
+                Name = "Belarus",
+                Directions = new List<Direction>()
+                {
+                    new Direction()
+                    {
+                        Name = "Mir",
+                        Description = "Some sample description",
+                    },
+                    new Direction()
+                    {
+                        Name = "Nesvizh",
+                        Description = "Some sample description",
+                    },
+                }
+            });
+            _context.Countries.Add(new Country()
+            {
+                Name = "Ukraine",
+                Directions = new List<Direction>()
+                {
+                    new Direction()
+                    {
+                        Name = "Kiev",
+                        Description = "Some sample description",
+                    },
+                }
+            });
             return _context.SaveChangesAsync(cancellationToken);
         }
     }
