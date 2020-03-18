@@ -8,7 +8,6 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Direction> builder)
         {
-            builder.HasIndex(x => x.Id);
             builder
                 .HasOne(x => x.Country)
                 .WithMany(x => x.Directions)

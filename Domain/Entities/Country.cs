@@ -7,6 +7,6 @@ namespace Domain.Entities
     {
         public string Name { get; set; }
 
-        public List<Direction> Directions { get; set; }
+        public List<Direction> Directions { get; set; } = new List<Direction>();
     }
 }

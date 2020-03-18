@@ -6,31 +6,31 @@ using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Companies.Queries
+namespace Application.Countries.Queries
 {
-    public class GetCompanyByIdQuery : IRequest<CompanyDto>
+    public class GetCountryByIdQuery : IRequest<CountryDto>
     {
         public int Id { get; set; }
     }
 
-    public class GetCompanyByIdQueryHandler : IRequestHandler<GetCompanyByIdQuery, CompanyDto>
+    public class GetCountryByIdQueryHandler : IRequestHandler<GetCountryByIdQuery, CountryDto>
     {
         private readonly IDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetCompanyByIdQueryHandler(IDbContext context, IMapper mapper)
+        public GetCountryByIdQueryHandler(IDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public async Task<CompanyDto> Handle(GetCompanyByIdQuery query, CancellationToken cancellationToken)
+        public async Task<CountryDto> Handle(GetCountryByIdQuery query, CancellationToken cancellationToken)
         {
-            var company = await _context.Companies
+            var country = await _context.Countries
                 .AsNoTracking()
                 .Where(x => x.Id == query.Id)
                 .FirstAsync(cancellationToken);
             
-            return _mapper.Map<CompanyDto>(company);
+            return _mapper.Map<CountryDto>(country);
         }
     }
 }

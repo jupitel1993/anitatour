@@ -8,7 +8,6 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasIndex(x => x.Id);
             builder.HasIndex(x => x.Login).IsUnique();
             
             builder

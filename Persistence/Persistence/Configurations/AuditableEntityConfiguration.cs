@@ -19,6 +19,9 @@ namespace Persistence.Configurations
                     .Entity(entityType.ClrType)
                     .Property(nameof(AuditableEntity.LastModifiedBy))
                     .IsRequired();
+                modelBuilder
+                    .Entity(entityType.ClrType)
+                    .HasIndex("Id");
             }
 
             return modelBuilder;

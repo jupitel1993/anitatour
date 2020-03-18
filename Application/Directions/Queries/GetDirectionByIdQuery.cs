@@ -2,35 +2,36 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Countries;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Companies.Queries
+namespace Application.Directions.Queries
 {
-    public class GetCompanyByIdQuery : IRequest<CompanyDto>
+    public class GetDirectionByIdQuery : IRequest<DirectionDto>
     {
         public int Id { get; set; }
     }
 
-    public class GetCompanyByIdQueryHandler : IRequestHandler<GetCompanyByIdQuery, CompanyDto>
+    public class GetDirectionByIdQueryHandler : IRequestHandler<GetDirectionByIdQuery, DirectionDto>
     {
         private readonly IDbContext _context;
         private readonly IMapper _mapper;
 
-        public GetCompanyByIdQueryHandler(IDbContext context, IMapper mapper)
+        public GetDirectionByIdQueryHandler(IDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public async Task<CompanyDto> Handle(GetCompanyByIdQuery query, CancellationToken cancellationToken)
+        public async Task<DirectionDto> Handle(GetDirectionByIdQuery query, CancellationToken cancellationToken)
         {
-            var company = await _context.Companies
+            var direction = await _context.Directions
                 .AsNoTracking()
                 .Where(x => x.Id == query.Id)
                 .FirstAsync(cancellationToken);
             
-            return _mapper.Map<CompanyDto>(company);
+            return _mapper.Map<DirectionDto>(direction);
         }
     }
 }

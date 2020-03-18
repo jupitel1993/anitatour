@@ -11,6 +11,8 @@ namespace Application.Common.Interfaces
 
         DbSet<User> Users { get; set; }
         DbSet<Company> Companies { get; set; }
+        DbSet<Country> Countries { get; set; }
+        DbSet<Direction> Directions { get; set; }
 
     }
 }

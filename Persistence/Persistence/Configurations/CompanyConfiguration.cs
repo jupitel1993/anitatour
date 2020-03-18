@@ -8,7 +8,6 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Company> builder)
         {
-            builder.HasIndex(x => x.Id);
             
         }
     }

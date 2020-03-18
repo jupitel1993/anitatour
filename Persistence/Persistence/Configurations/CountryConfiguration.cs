@@ -8,7 +8,6 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-            builder.HasIndex(x => x.Id);
             builder.Property(x => x.Name).IsRequired();
         }
     }
