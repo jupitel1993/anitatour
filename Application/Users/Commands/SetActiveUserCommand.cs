@@ -16,14 +16,18 @@ namespace Application.Users.Commands
     public class SetActiveUserCommandHandler : AsyncRequestHandler<SetActiveUserCommand>
     {
         private readonly IDbContext _context;
+        private readonly ITokenService _tokenService;
 
-        public SetActiveUserCommandHandler(IDbContext context)
+        public SetActiveUserCommandHandler(IDbContext context, ITokenService tokenService)
         {
             _context = context;
+            _tokenService = tokenService;
         }
         protected override async Task Handle(SetActiveUserCommand command, CancellationToken cancellationToken)
         {
-            var user = _context.Users.First(x => x.Id == command.UserId);
+            var user = _context.Users
+                .Where(x => x.Role < _tokenService.GetUserRole())
+                .First(x => x.Id == command.UserId);
             user.Active = command.State;
             await _context.SaveChangesAsync(cancellationToken);
             
