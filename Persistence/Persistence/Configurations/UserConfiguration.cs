@@ -8,9 +8,12 @@ namespace Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasIndex(x => x.Id);
             builder.HasIndex(x => x.Login).IsUnique();
-            
+
+            builder.HasMany(x => x.Persons)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
             builder
                 .Property(x => x.Login)
                 .IsRequired();
@@ -29,9 +32,11 @@ namespace Persistence.Configurations
                 .IsRequired();
 
             builder
-                .Property(x => x.Super)
-                .HasDefaultValue(false)
+                .Property(x => x.Role)
                 .IsRequired();
+
+            builder
+                .HasOne(x => x.Company);
 
         }
     }

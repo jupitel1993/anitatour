@@ -42,7 +42,13 @@ namespace Persistence
         }
 
         public DbSet<User> Users { get; set; }
-        
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Direction> Directions { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Tour> Tours { get; set; }
+        public DbSet<Program> Programs { get; set; }
+
         private void SetModifyUserAndDate()
         {
             ChangeTracker.DetectChanges();

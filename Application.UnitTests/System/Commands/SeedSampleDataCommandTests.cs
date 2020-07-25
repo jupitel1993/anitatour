@@ -14,7 +14,7 @@ namespace Application.UnitTests.System.Commands
         public SeedSampleDataCommandTests()
         {
             _request = new SeedSampleDataCommand();
-            _handler = new SeedSampleDataCommandHandler(Context);
+            _handler = new SeedSampleDataCommandHandler(Context, HasherServiceMock);
         }
 
         [Fact]

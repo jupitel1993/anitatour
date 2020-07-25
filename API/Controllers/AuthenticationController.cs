@@ -20,12 +20,12 @@ namespace API.Controllers
         [AllowAnonymous]
         [HttpPost("login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserDto>> Login([FromBody] LoginCommand command)
+        public async Task<ActionResult<TokenDto>> Login([FromBody] LoginCommand command)
         {
-            var id = await Mediator.Send(command);
-            var (token, validTo) = _tokenService.GetSecurityToken(id, command.Login);
+            var (id, role) = await Mediator.Send(command);
+            var (token, validTo) = _tokenService.GetSecurityToken(id, role, command.Login);
 
-            return Ok(new UserDto(){ Token = token, ExpDate = validTo, Id = id, UserName = command.Login});
+            return Ok(new TokenDto(){ Token = token, ExpDate = validTo, Id = id, UserName = command.Login});
         }
 
         [HttpPost("logout")]

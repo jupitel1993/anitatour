@@ -61,11 +61,11 @@ namespace API.Common.Constants {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A shop with value &quot;{0}&quot; already exists. Please enter another..
+        ///   Looks up a localized string similar to Entity with value &quot;{0}&quot; already exists. Please enter another..
         /// </summary>
-        public static string ShopValueIsNotUnique {
+        public static string SomeValueIsNotUnique {
             get {
-                return ResourceManager.GetString("ShopValueIsNotUnique", resourceCulture);
+                return ResourceManager.GetString("SomeValueIsNotUnique", resourceCulture);
             }
         }
         

@@ -13,7 +13,7 @@ namespace Application.Authentication.Commands
         /// </summary>
         public LoginCommandValidator()
         {
-            RuleFor(x => x.UserName)
+            RuleFor(x => x.Login)
                 .NotEmpty();
             RuleFor(x => x.Password)
                 .NotEmpty();
