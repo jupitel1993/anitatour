@@ -9,7 +9,11 @@ namespace Persistence.Configurations
         public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasIndex(x => x.Login).IsUnique();
-            
+
+            builder.HasMany(x => x.Persons)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
+
             builder
                 .Property(x => x.Login)
                 .IsRequired();

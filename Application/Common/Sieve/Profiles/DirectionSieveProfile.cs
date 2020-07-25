@@ -16,6 +16,9 @@ namespace Application.Common.Sieve.Profiles
             mapper.Property<Direction>(x => x.Country)
                 .CanSort()
                 .CanFilter();
+            mapper.Property<Direction>(x => x.Country.Id)
+                .CanSort()
+                .CanFilter();
 
 
             return mapper;

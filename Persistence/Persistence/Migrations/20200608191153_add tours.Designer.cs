@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200608191153_add tours")]
+    partial class addtours
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,10 +191,7 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TourId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
+                    b.Property<int?>("TourId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -201,9 +200,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("TourId");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Persons");
+                    b.ToTable("Person");
                 });
 
             modelBuilder.Entity("Domain.Entities.Program", b =>
@@ -242,7 +239,53 @@ namespace Persistence.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Programs");
+                    b.ToTable("Program");
+                });
+
+            modelBuilder.Entity("Domain.Entities.SuggestedTourist", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LastModifiedBy")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TourId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("TourId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("SuggestedTourist");
                 });
 
             modelBuilder.Entity("Domain.Entities.Tour", b =>
@@ -281,7 +324,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ProgramId");
 
-                    b.ToTable("Tours");
+                    b.ToTable("Tour");
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
@@ -351,14 +394,28 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Person", b =>
                 {
-                    b.HasOne("Domain.Entities.Tour", "Tour")
+                    b.HasOne("Domain.Entities.Tour", null)
                         .WithMany("Tourists")
+                        .HasForeignKey("TourId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("Domain.Entities.SuggestedTourist", b =>
+                {
+                    b.HasOne("Domain.Entities.Person", "Person")
+                        .WithMany()
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Tour", "Tour")
+                        .WithMany()
                         .HasForeignKey("TourId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.User", "User")
-                        .WithMany("Persons")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
